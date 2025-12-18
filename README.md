@@ -2,28 +2,41 @@
 
 ## Live Demo
 
-- Include a link to the live version of the project hosted on Render.
-
+https://silentstrings.onrender.com/
 ## Project Overview
 
-- Briefly describe the project and its purpose.
+This project is a website that serves as an archive of annonymous posts users can submit. Silent Strings allows users to release a message they would like to say to someone they can no longer talk, won't talk to for any reason, or someone they simply miss. They also have the option to add a song that corresponds to the message towards the person. 
+The annonymous aspect as a requirement elevates the site, as people can be as honest as they want without feeling pressure of others knowing who the message is from. 
+I wanted the project to feel like a bulletin board gallery visually, which is reflected by the string/push pin details to the message entries. 
 
 ## Endpoints
 
-- List all the endpoints of the API in this project with a brief description of what each endpoint does.
-
+Entry Api on MongoDB - mongodb+srv://emilynqa:Silviaamaro43@cluster0.4nvxhvk.mongodb.net/Entry?appName=Cluster0
+It wasnt an API specifically but project pulls from spotify too for the songs
 ## Technologies Used
 
 - List the technologies and tools used in the project:
-    - **Languages**: HTML, CSS, JavaScript
-    - **Libraries**: (e.g., GSAP for animations)
-    - **Other**: Figma for design, Adobe Illustrator for illustrations, OpenAI for A.I. generated assets, etc.
+     HTML HBS
+     CSS
+     JavaScript
+     MongoDB
+     Express Install
+
+    - **Other**:
+    Spotify database for the songs
 
 ## Credits
 
-- List any third-party assets used in the project (e.g., sound effects, images, fonts) and provide proper attribution.
-- Acknowledge any resources, tutorials, or references you used to help complete the project.
+- Spotify
+-  Use of AI for certain code (credited in the comments of the code)
+- crinkle paper image (google)
+- Previous lectures and code from class 13 for reference 
 
 ## Future Enhancements
 
-- List any features you would’ve liked to add if given more time
+- More animations using external libraries
+- More enhancemet on the string detail, have string wrap around entry box like yarn 
+- add more detail like the date of the message being upload 
+- more animations for the entries 
+- more detail for the filtering (maybe by color of cards)
+
