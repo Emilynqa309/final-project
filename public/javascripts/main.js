@@ -10,6 +10,7 @@ const introOverlay = document.getElementById('intro-overlay');
 const enterButton = document.getElementById('enter-site');
 
 
+
 enterButton.addEventListener('click', () => {
   introOverlay.classList.add('fade-out');
 
@@ -17,6 +18,13 @@ enterButton.addEventListener('click', () => {
     introOverlay.style.display = 'none';
   }, 500);
 });
+
+//  this controls the string colors
+const colorMap = {
+  red: '#8E3B46',
+  gold: '#c89b5c',
+  gray: '#7a6a73'
+};
 
 function getSpotifyEmbedUrl(url) {
   if (!url) return null;
@@ -34,8 +42,10 @@ function updateList() {
   for (let i = 0; i < entries.length; i++) {
     const entryDiv = document.createElement('div');
     entryDiv.classList.add('entry');
-    entryDiv.style.color = entries[i].stringColor || 'red';
+    const stringColor = colorMap[entries[i].stringColor] || colorMap.red;
+    entryDiv.style.color = stringColor;
 
+    
     if (entries[i].song) {
       entryDiv.classList.add('has-song');
     }
@@ -95,6 +105,8 @@ function updateList() {
     // message text
     const textP = document.createElement('p');
     textP.innerText = entries[i].text;
+    textP.style.color = '#853c1c';
+
 
     entryDiv.appendChild(deleteButton);
     entryDiv.appendChild(textP);

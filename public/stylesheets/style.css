@@ -6,8 +6,14 @@
 }
 
 body {
+  background:
+  linear-gradient(
+    to bottom,
+    #fff8f0 0%,
+    #f0e1d5 60%,
+    #e6d2c4 100%
+  );
   font-family: "Vend Sans", sans-serif;
-  background-color: #fff8f0;
   color: #2b2b2b;
   line-height: 1.6;
 }
@@ -21,7 +27,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: radial-gradient(circle, #fff, #f4ebe1);
+  /* background: radial-gradient(circle, #fff, #f4ebe1); */
 }
 
 .intro h1 {
@@ -88,7 +94,7 @@ body {
 }
 
 .intro-modal button {
-  background-color: #8b0000;
+  background-color: #d0605e;
   color: #fff;
   border: none;
   padding: 0.7rem 1.6rem;
@@ -98,7 +104,7 @@ body {
 }
 
 .intro-modal button:hover {
-  background-color: #600000;
+  background-color: #745669
 }
 
 /* FADE OUT */
@@ -199,7 +205,7 @@ body {
   margin-top: 1rem;
   margin-bottom: 0rem;
   padding: 0.8rem;
-  background-color: #8b0000;
+  background-color: #d0605e;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -209,7 +215,7 @@ body {
 }
 
 #entry-form button:hover {
-  background-color: #600000;
+  background-color: #745669;
 }
 
 /* filter messages */
@@ -224,8 +230,8 @@ body {
 
 .filters button {
   background: none;
-  border: 1px solid #8b0000;
-  color: #8b0000;
+  border: 1px solid #853c1c;
+  color: #853c1c;
   padding: 0.4rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -234,7 +240,7 @@ body {
 }
 
 .filters button:hover {
-  background-color: #8b0000;
+  background-color: #745669;
   color: #fff;
 }
 
@@ -242,12 +248,12 @@ body {
 .gallery {
   padding: 1rem 1rem 6rem;
   position: relative;
-  margin-top: 0;         /* kill top margin */
+  margin-top: 0;       
 }
 
 .string-line {
   height: 2px;
-  background: #8b0000;
+  background: #745669;
   margin-bottom: 5rem;
 
 }
@@ -264,41 +270,69 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4.5rem;
+  gap: 5rem;
   align-items: flex-start;
- column-count: 3;
-  column-gap: 3rem;
+
 }
 
 .entry {
   width: 260px;
-  height: 260px;
+  min-height: 70px;
+  height:auto;
   background-color: #fff;
   padding: 1rem;
   text-align: center;
   position: relative;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 1);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.75);
   animation: sway 6s ease-in-out infinite;
   transform-origin: top center;
   transition: width 0.4s ease;
   z-index: 2;  
+  background-image: url("/images/paper.jpeg");
+  background-size: cover;        /* or contain / repeat */
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
 
+.entry::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5); 
+  pointer-events: none;
+  z-index: 1;
+}
+.entry > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* push pin affect  */
 .entry::before {
   content: "";
   position: absolute;
-  inset: -6px;
-  border: 1.5px solid currentColor;
-  opacity: 0.35;
-  border-radius: 6px;
-  filter: blur(1px);
-  pointer-events: none;
+  top: -63px;        
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ff6b6b,
+    #8b0000
+  );
+
+  box-shadow:
+    0 2px 3px rgba(0,0,0,0.4),
+    inset 0 1px 1px rgba(255,255,255,0.5);
+
+  z-index: 4;
 }
 
-.entry:hover::before {
-  opacity: 0.8;
-  filter: blur(2px) drop-shadow(0 0 100px currentColor);
-}
 
 .entry .yarn {
   position: absolute;
@@ -306,6 +340,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   overflow: visible;
+  z-index: 0;
 }
 
 @keyframes yarn-sway {
@@ -332,14 +367,7 @@ body {
 .entry.has-song {
   width: 350px;
   height: auto;
-
 }
-
-.entry.has-song::before {
-  opacity: 0.6;
-  filter: blur(2px) drop-shadow(0 0 10px currentColor);
-}
-
 
 /* spotify song structure  */
 .song-embed {
@@ -361,11 +389,22 @@ body {
 .entry p {
   font-size: 0.95rem;
   opacity: 1;
-  max-height: 225px;          
+  max-height: 220px;          
   overflow-y: auto;
   padding-right: 6px;
   flex-shrink: 0;
+  margin-top: .5rem;
 }
+
+.entry p::-webkit-scrollbar {
+  width: 4px;
+}
+
+.entry p::-webkit-scrollbar-thumb {
+  background: rgba(133, 60, 28, 0.3);
+  border-radius: 10px;
+}
+
 
 .entry.new-entry p {
   opacity: 0;
@@ -401,7 +440,7 @@ body {
   top: -40px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -414,9 +453,10 @@ body {
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  color: #8b0000;
+  color: #060405;
   z-index: 10;
   padding: 2px 6px;
+  border-radius: 30px;
 }
 
 .delete-btn:hover {
@@ -473,3 +513,4 @@ body {
     gap: 5rem;
   }
 }
+
