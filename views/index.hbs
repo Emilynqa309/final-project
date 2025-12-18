@@ -11,7 +11,29 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
-<body>
+
+  <!-- SVG filters -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    style="position:absolute; width:0; height:0; overflow:hidden;"
+    aria-hidden="true"
+  >
+    <defs>
+      <filter id="yarnNoise">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.015"
+          numOctaves="2"
+          seed="3"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          scale="15"
+        />
+      </filter>
+    </defs>
+  </svg>
+</body>
 
 <!-- intro window at the beginning of page -->
 <div id="intro-overlay">

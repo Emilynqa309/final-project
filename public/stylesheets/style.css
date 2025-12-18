@@ -1,4 +1,4 @@
-/* RESET */
+
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +34,6 @@ body {
 .intro p {
   max-width: 600px;
   font-size: 1.1rem;
-
   margin-bottom: 2rem;
 }
 
@@ -51,7 +50,7 @@ body {
   color: #fff;
 }
 
-/*  MODAL OVERLAY */
+/*  modal overlay */
 #intro-overlay {
   position: fixed;
   top: 0;
@@ -159,6 +158,8 @@ body {
   font-size: 1rem;
   border: 1px solid #ccc;
   resize: vertical;
+  border-radius: 20px;
+
 }
 
 #entry-form input {
@@ -166,6 +167,8 @@ body {
   font-size: 0.9rem;
   font-family: "Vend Sans", sans-serif;
   border: 1px solid #ccc;
+  border-radius: 20px;
+
  
 }
 
@@ -175,6 +178,8 @@ body {
   width: 100% ; 
  font-family: "Vend Sans", sans-serif;
   border: 1px solid #ccc;
+  border-radius: 20px;
+
   
 }
 #entry-form .select-row {
@@ -199,6 +204,7 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 20px;
 
 }
 
@@ -223,6 +229,8 @@ body {
   padding: 0.4rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 20px;
+
 }
 
 .filters button:hover {
@@ -230,12 +238,11 @@ body {
   color: #fff;
 }
 
-/* GALLERY */
+/* entire gallery section */
 .gallery {
   padding: 1rem 1rem 6rem;
   position: relative;
   margin-top: 0;         /* kill top margin */
-
 }
 
 .string-line {
@@ -244,30 +251,95 @@ body {
   margin-bottom: 5rem;
 
 }
-
-/* ENTRIES */
+.string-layer {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+/* entries boxes  */
 .entries {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 3rem;
+  gap: 4.5rem;
+  align-items: flex-start;
+ column-count: 3;
+  column-gap: 3rem;
 }
 
 .entry {
-  width: 220px;
+  width: 260px;
+  height: 260px;
   background-color: #fff;
   padding: 1rem;
   text-align: center;
   position: relative;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 1);
   animation: sway 6s ease-in-out infinite;
   transform-origin: top center;
   transition: width 0.4s ease;
+  z-index: 2;  
 }
+
+.entry::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1.5px solid currentColor;
+  opacity: 0.35;
+  border-radius: 6px;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+.entry:hover::before {
+  opacity: 0.8;
+  filter: blur(2px) drop-shadow(0 0 100px currentColor);
+}
+
+.entry .yarn {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: visible;
+}
+
+@keyframes yarn-sway {
+  0%   { transform: translateX(-50%) rotate(-1.5deg); }
+  50%  { transform: translateX(-50%) rotate(1.5deg); }
+  100% { transform: translateX(-50%) rotate(-1.5deg); }
+}
+
+.entry .yarn {
+  animation: yarn-sway 6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.yarn {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: visible;
+  pointer-events: none;
+}
+
 
 .entry.has-song {
   width: 350px;
+  height: auto;
+
 }
+
+.entry.has-song::before {
+  opacity: 0.6;
+  filter: blur(2px) drop-shadow(0 0 10px currentColor);
+}
+
 
 /* spotify song structure  */
 .song-embed {
@@ -288,6 +360,28 @@ body {
 
 .entry p {
   font-size: 0.95rem;
+  opacity: 1;
+  max-height: 225px;          
+  overflow-y: auto;
+  padding-right: 6px;
+  flex-shrink: 0;
+}
+
+.entry.new-entry p {
+  opacity: 0;
+  animation: message-fade 0.8s ease forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes message-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .entry .song {
@@ -297,8 +391,9 @@ body {
   color: #555;
 }
 
-/* STRING */
-.entry .string {
+/* String*/
+.entry .string
+ {
   width: 2px;
   height: 40px;
   background-color: currentColor;
@@ -306,6 +401,8 @@ body {
   top: -40px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .delete-btn {
@@ -353,7 +450,7 @@ body {
     width: 180px;
   }
 }
-
+/* this is to make the layout better when tabs move, string looks in place and all*/
 @media (max-width: 480px) {
   .filters {
     flex-wrap: wrap;
@@ -365,3 +462,14 @@ body {
   }
 }
 
+@media (max-width: 900px) {
+  .entries {
+    gap: 4rem 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .entries {
+    gap: 5rem;
+  }
+}

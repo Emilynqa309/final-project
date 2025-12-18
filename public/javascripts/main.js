@@ -1,4 +1,6 @@
 let entries = [];
+let newestEntryId = null;
+
 
 // DOM elements
 const form = document.getElementById('entry-form');
@@ -17,78 +19,112 @@ enterButton.addEventListener('click', () => {
 });
 
 function getSpotifyEmbedUrl(url) {
-    if (!url) return null;
-  
-    const match = url.match(/track\/([a-zA-Z0-9]+)/);
-    if (!match) return null;
-  
-    return `https://open.spotify.com/embed/track/${match[1]}`;
-  }
+  if (!url) return null;
+
+  const match = url.match(/track\/([a-zA-Z0-9]+)/);
+  if (!match) return null;
+
+  return `https://open.spotify.com/embed/track/${match[1]}`;
+}
 
 function updateList() {
-    
+
   entriesContainer.innerHTML = '';
 
   for (let i = 0; i < entries.length; i++) {
     const entryDiv = document.createElement('div');
     entryDiv.classList.add('entry');
     entryDiv.style.color = entries[i].stringColor || 'red';
-    
+
     if (entries[i].song) {
-        entryDiv.classList.add('has-song');
-      }
+      entryDiv.classList.add('has-song');
+    }
+    if (entries[i]._id === newestEntryId) {
+      entryDiv.classList.add('new-entry');
+    }
 
- // delete button
- const deleteButton = document.createElement('button');
- deleteButton.classList.add('delete-btn');
- deleteButton.innerText = '×';
- deleteButton.addEventListener('click', (e) => {
-   e.stopPropagation();
-   deleteEntry(entries[i]._id);
 
- });
+    // delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-btn');
+    deleteButton.innerText = '×';
+    deleteButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      deleteEntry(entries[i]._id);
 
-    // string line
-    const stringDiv = document.createElement('div');
-    stringDiv.classList.add('string');
+    });
+// svg for the string movement (used chat for help!)
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, "svg");
+    svg.classList.add("yarn");
+    svg.setAttribute("width", "20");
+    svg.setAttribute("height", "60");
+    svg.setAttribute("viewBox", "0 0 20 60");
+
+    const path = document.createElementNS(svgNS, "path");
+    path.setAttribute("d", "M10 0 C 8 15, 12 30, 10 60");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "currentColor");
+    path.setAttribute("stroke-width", "3");
+    path.setAttribute("stroke-linecap", "round");
+
+    path.style.filter = "url(#yarnNoise)";
+
+    svg.appendChild(path);
+    entryDiv.appendChild(svg);
+
+    let t = Math.random() * 10;
+
+    function wiggleYarn() {
+      t += 0.02;
+
+      const x1 = 8 + Math.sin(t) * 2;
+      const x2 = 12 + Math.cos(t * 0.9) * 2;
+
+      path.setAttribute(
+        "d",
+        `M10 0 C ${x1} 18, ${x2} 36, 10 60`
+      );
+
+      requestAnimationFrame(wiggleYarn);
+    }
+
+    wiggleYarn();
+
 
     // message text
     const textP = document.createElement('p');
     textP.innerText = entries[i].text;
 
     entryDiv.appendChild(deleteButton);
-    entryDiv.appendChild(stringDiv);
     entryDiv.appendChild(textP);
 
 
-  
-
     //spofity link (chatGPT helped me!)
     if (entries[i].song) {
-        const embedUrl = getSpotifyEmbedUrl(entries[i].song);
-  
-        if (embedUrl) {
-          const iframe = document.createElement('iframe');
-          iframe.src = embedUrl;
-          iframe.width = '100%';
-          iframe.height = '80';
-          iframe.frameBorder = '0';
-          iframe.allow =
-            'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-  
-            const songWrap = document.createElement('div');
-            songWrap.classList.add('song-embed');
-            
-            songWrap.appendChild(iframe);
-            entryDiv.appendChild(songWrap);
-            
-        }
+      const embedUrl = getSpotifyEmbedUrl(entries[i].song);
+
+      if (embedUrl) {
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.width = '100%';
+        iframe.height = '80';
+        iframe.frameBorder = '0';
+        iframe.allow =
+          'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+
+        const songWrap = document.createElement('div');
+        songWrap.classList.add('song-embed');
+
+        songWrap.appendChild(iframe);
+        entryDiv.appendChild(songWrap);
+
       }
-  
-      entriesContainer.appendChild(entryDiv);
     }
+
+    entriesContainer.appendChild(entryDiv);
   }
-  
+}
 
 // filter to get all entries 
 async function getEntries(tag = '') {
@@ -134,6 +170,8 @@ async function addEntry(entryData) {
 
   const data = await response.json();
   console.log('added entry:', data);
+  // mark this as newest
+  newestEntryId = data._id;
 
   getEntries();
 }
@@ -151,7 +189,7 @@ async function deleteEntry(id) {
   getEntries();
 }
 
-  
+
 // filter entries by their tag
 filterButtons.forEach(button => {
   button.addEventListener('click', () => {

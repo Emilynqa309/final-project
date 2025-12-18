@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Entry = require('../models/entry');
 
-
+// this gets the entries from the api
 router.get('/', async (req, res) => {
   try {
     const filter = {};
@@ -18,9 +18,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-/**
- * POST /entries
- */
+// posts entries 
 router.post('/', async (req, res) => {
   try {
     const entry = new Entry({
@@ -37,6 +35,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// deletes entries from api
 router.delete('/:id', async (req, res) => {
     try {
       await Entry.findByIdAndDelete(req.params.id);
