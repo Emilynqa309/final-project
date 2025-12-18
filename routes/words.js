@@ -3,7 +3,7 @@ var router = express.Router();
 const Entry = require('../models/entry');
 
 
-router.get('/entries', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const filter = {};
 
@@ -21,7 +21,7 @@ router.get('/entries', async (req, res) => {
 /**
  * POST /entries
  */
-router.post('/entries', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const entry = new Entry({
       text: req.body.text,
@@ -36,6 +36,17 @@ router.post('/entries', async (req, res) => {
     res.status(400).json({ error: 'Failed to create entry' });
   }
 });
+
+router.delete('/:id', async (req, res) => {
+    try {
+      await Entry.findByIdAndDelete(req.params.id);
+      res.json({ message: 'Deleted' });
+    } catch (err) {
+      res.status(500).json({ error: 'Delete failed' });
+    }
+  });
+  
+  
 
 module.exports = router;
 
