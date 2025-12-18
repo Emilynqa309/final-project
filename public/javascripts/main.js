@@ -26,6 +26,7 @@ const colorMap = {
   gray: '#7a6a73'
 };
 
+//spotify option to enter link function
 function getSpotifyEmbedUrl(url) {
   if (!url) return null;
 
@@ -35,6 +36,7 @@ function getSpotifyEmbedUrl(url) {
   return `https://open.spotify.com/embed/track/${match[1]}`;
 }
 
+// updating the entries
 function updateList() {
 
   entriesContainer.innerHTML = '';
@@ -83,6 +85,7 @@ function updateList() {
     svg.appendChild(path);
     entryDiv.appendChild(svg);
 
+//animation for the yarn/string wiggle (perlin noise)
     let t = Math.random() * 10;
 
     function wiggleYarn() {
@@ -112,7 +115,7 @@ function updateList() {
     entryDiv.appendChild(textP);
 
 
-    //spofity link (chatGPT helped me!)
+    //spofity song to appear (chatGPT helped me!)
     if (entries[i].song) {
       const embedUrl = getSpotifyEmbedUrl(entries[i].song);
 

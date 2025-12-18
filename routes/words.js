@@ -37,19 +37,18 @@ router.post('/', async (req, res) => {
 
 // deletes entries from api
 router.delete('/:id', async (req, res) => {
-    try {
-      await Entry.findByIdAndDelete(req.params.id);
-      res.json({ message: 'Deleted' });
-    } catch (err) {
-      res.status(500).json({ error: 'Delete failed' });
-    }
-  });
-  
-  
+  try {
+    await Entry.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Deleted' });
+  } catch (err) {
+    res.status(500).json({ error: 'Delete failed' });
+  }
+});
+
+
 
 module.exports = router;
 
 
-  
-  
-  
+
+

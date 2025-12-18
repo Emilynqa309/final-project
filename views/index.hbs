@@ -1,38 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Silent Strings</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 
-  <!-- SVG filters -->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    style="position:absolute; width:0; height:0; overflow:hidden;"
-    aria-hidden="true"
-  >
-    <defs>
-      <filter id="yarnNoise">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.015"
-          numOctaves="2"
-          seed="3"
-        />
-        <feDisplacementMap
-          in="SourceGraphic"
-          scale="15"
-        />
-      </filter>
-    </defs>
-  </svg>
+<!-- SVG filters -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute; width:0; height:0; overflow:hidden;"
+  aria-hidden="true">
+  <defs>
+    <filter id="yarnNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="3" />
+      <feDisplacementMap in="SourceGraphic" scale="15" />
+    </filter>
+  </defs>
+</svg>
 </body>
 
 <!-- intro window at the beginning of page -->
@@ -40,7 +31,8 @@
   <div class="intro-modal">
     <h1>Silent Strings</h1>
     <p>
-      Strings to a person may remain— leave an annonymous message to someone you no longer speak to, a friend you simply miss, or someone who passed.
+      Strings to a person may remain— leave an annonymous message to someone you no longer speak to, a friend you simply
+      miss, or someone who passed.
     </p>
 
     <button id="enter-site">Enter</button>
@@ -48,25 +40,16 @@
 </div>
 
 
-  <!-- submission form display at the top of the page -->
-  <section id="submit" class="submit-section">
-    <h2>Release a Message</h2>
+<!-- submission form display at the top of the page -->
+<section id="submit" class="submit-section">
+  <h2>Release a Message</h2>
 
-    <form id="entry-form">
+  <form id="entry-form">
 
-      <textarea
-        name="text"
-        id="text"
-        placeholder="What’s something you never got to say?"
-        required
-      ></textarea>
+    <textarea name="text" id="text" placeholder="What’s something you never got to say?" required></textarea>
 
-          <input
-        type="text"
-        name="song"
-        placeholder="Paste a Spotify track link (optional)"
-      />
-<div class=" select-row">
+    <input type="text" name="song" placeholder="Paste a Spotify track link (optional)" />
+    <div class=" select-row">
       <select name="tag" required>
         <option value="">To Someone I...</option>
         <option value="loss">Someone I lost</option>
@@ -80,28 +63,29 @@
         <option value="gold">Gold string</option>
         <option value="gray">Faded string</option>
       </select>
-</div>
-
-      <button type="submit">Let it go</button>
-    </form>
-  </section>
-
-  <!-- filter buttons to seperate the messages -->
-  <section class="filters">
-    <button data-tag="">All</button>
-    <button data-tag="loss"> loss</button>
-    <button data-tag="distance">Distance</button>
-    <button data-tag="regret">Indifference</button>
-  </section>
-
-  <!-- the string that appears in the gallery -->
-  <section class="gallery">
-    <div class="string-line"></div>
-
-    <div id="entries" class="entries">
     </div>
-  </section>
 
-  <script src="/javascripts/main.js"></script>
+    <button type="submit">Let it go</button>
+  </form>
+</section>
+
+<!-- filter buttons to seperate the messages -->
+<section class="filters">
+  <button data-tag="">All</button>
+  <button data-tag="loss"> loss</button>
+  <button data-tag="distance">Distance</button>
+  <button data-tag="regret">Indifference</button>
+</section>
+
+<!-- the string that appears in the gallery -->
+<section class="gallery">
+  <div class="string-line"></div>
+
+  <div id="entries" class="entries">
+  </div>
+</section>
+
+<script src="/javascripts/main.js"></script>
 </body>
+
 </html>
