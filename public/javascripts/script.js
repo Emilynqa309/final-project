@@ -1,1 +1,0 @@
-// Front end JavaScript code goes here

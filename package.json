@@ -8,9 +8,25 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^17.2.3",
     "express": "~4.16.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.2",
     "morgan": "~1.9.1"
-  }
+  },
+  "description": "- Include a link to the live version of the project hosted on Render.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emilynqa309/final-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emilynqa309/final-project/issues"
+  },
+  "homepage": "https://github.com/Emilynqa309/final-project#readme"
 }
